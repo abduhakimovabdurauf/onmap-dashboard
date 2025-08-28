@@ -148,19 +148,27 @@ function RouteComponent() {
               </tr>
             </thead>
             <tbody>
-              {filteredBanks.map((bank: Bank) => (
-                <tr key={bank.id}>
-                  <td>{bank.full_title}</td>
-                  <td className="text-right">
-                    {(buyOrSell === 'buy' || filter === 'all') ? (bank.buying === 'no data' ? '-' : bank.buying) : null}
+              {filteredBanks && filteredBanks.length > 0 ? (
+                filteredBanks.map((bank: Bank) => (
+                  <tr key={bank.id}>
+                    <td>{bank.full_title}</td>
+                    <td className="text-right">
+                      {(buyOrSell === 'buy' || filter === 'all') ? (bank.buying === 'no data' ? '-' : bank.buying) : null}
+                    </td>
+                    <td className="text-right">
+                      {(buyOrSell === 'sell' || filter === 'all') ? (bank.selling === 'no data' ? '-' : bank.selling) : null}
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td colSpan={3} className="text-center text-gray-500 py-4">
+                    Данные отсутствуют
                   </td>
-                  <td className="text-right">
-                    {(buyOrSell === 'sell' || filter === 'all') ? (bank.selling === 'no data' ? '-' : bank.selling) : null}
-                  </td>
-
                 </tr>
-              ))}
+              )}
             </tbody>
+
           </table>
         </div>
       </div>
