@@ -1,20 +1,34 @@
 import { createRootRoute, Link, Outlet } from '@tanstack/react-router'
-import { TanStackRouterDevtools } from '@tanstack/react-router-devtools'
+
+const currencies = ['usd', 'eur', 'rub'] as const
 
 export const Route = createRootRoute({
-  component: () => (
-    <>
-      <div className="p-2 flex gap-2">
+  component: () => {
+  return (
+    <div className="bg-gray-100">
+      <nav className="p-2 flex justify-between gap-2 mx-auto w-full max-w-6xl sticky top-0 bg-white shadow-lg">
         <Link to="/" className="[&.active]:font-bold">
-          Home
-        </Link>{' '}
-        <Link to="/about" className="[&.active]:font-bold">
-          About
+          OnMap
         </Link>
-      </div>
-      <hr />
-      <Outlet />
-      <TanStackRouterDevtools />
-    </>
-  ),
+        <div className='flex gap-2'>
+           {currencies.map((currency) => (
+                <Link
+                    key={currency}
+                    to="/$currencyId"
+                    params={{ currencyId: currency }}
+                    className="[&.active]:font-bold"
+                >
+                    {currency.toUpperCase()}
+                </Link>
+            ))} 
+        </div>
+        
+      </nav>
+      <main >
+        <Outlet />
+      </main>
+    </div>
+  )
+},
+
 })
