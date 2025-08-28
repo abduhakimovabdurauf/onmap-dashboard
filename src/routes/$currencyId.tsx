@@ -151,8 +151,13 @@ function RouteComponent() {
               {filteredBanks.map((bank: Bank) => (
                 <tr key={bank.id}>
                   <td>{bank.full_title}</td>
-                  {(buyOrSell === 'buy' || filter === 'all') && <td className="text-right">{bank.buying}</td>}
-                  {(buyOrSell === 'sell' || filter === 'all') && <td className="text-right">{bank.selling}</td>}
+                  <td className="text-right">
+                    {(buyOrSell === 'buy' || filter === 'all') ? (bank.buying === 'no data' ? '-' : bank.buying) : null}
+                  </td>
+                  <td className="text-right">
+                    {(buyOrSell === 'sell' || filter === 'all') ? (bank.selling === 'no data' ? '-' : bank.selling) : null}
+                  </td>
+
                 </tr>
               ))}
             </tbody>
